@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Demo1.Models.InternalUser>
+
+@{
+    ViewData["Title"] = "Users List";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/InternalUIndex.css" asp-append-version="true" />
+}
+<h1>Users List</h1>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Department.Name</td>
+                    <td>@user.Password</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="button-container">
+    <a asp-action="Create" class="btn btn-primary">Create New User</a>
+</div>

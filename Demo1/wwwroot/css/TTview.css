@@ -1,0 +1,72 @@
+﻿/* Scoped styling for Time Table page */
+
+/* Container styling */
+.timetable-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f7f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    /* Heading styling */
+    .timetable-container h2 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+/* Header section for the Create New button */
+.timetable-header {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+/* Button styling */
+.btn-create {
+    background-color: #4957b7;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .btn-create:hover {
+        background-color: #1F2A69;
+    }
+
+/* Table styling */
+.timetable-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .timetable-table th,
+    .timetable-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .timetable-table th {
+        background-color: #4957b7;
+        color: white;
+        font-weight: bold;
+    }
+
+    .timetable-table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+/* Responsive table */
+.table-responsive {
+    overflow-x: auto;
+}

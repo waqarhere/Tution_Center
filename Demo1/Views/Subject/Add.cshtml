@@ -1,0 +1,72 @@
+﻿@model Demo1.Models.AddSubjectModel
+
+@{
+    ViewBag.Title = "Add Subject";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Add.css" asp-append-version="true" />
+}
+
+
+<div class="add-subject-container">
+    <h2>Add Enrollment</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GeneratedID, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.GeneratedID, new { @class = "form-control", @id = "GeneratedID" })
+            @Html.ValidationMessageFor(model => model.GeneratedID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @id = "Name", @readonly = "readonly" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "Email", @readonly = "readonly" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Program, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Program, new { @class = "form-control", @id = "Program", @readonly = "readonly" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn-submit" />
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#GeneratedID').blur(function () {
+                var generatedID = $(this).val();
+                if (generatedID) {
+                    $.getJSON('@Url.Action("GetStudentDetails")', { generatedID: generatedID }, function (data) {
+                        if (data.success) {
+                            $('#Name').val(data.name);
+                            $('#Email').val(data.email);
+                            $('#Program').val(data.program);
+                        } else {
+                            alert(data.message);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

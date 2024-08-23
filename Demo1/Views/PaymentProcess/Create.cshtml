@@ -1,0 +1,34 @@
+﻿@model Demo1.Models.PaymentProcess
+
+@{
+    ViewData["Title"] = "Create Department";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/payment-create.css" asp-append-version="true" />
+}
+
+
+<h2>Payment Details</h2>
+
+@* <h4>Titiles</h4> *@
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="PaymentTitle" class="control-label"></label>
+                <input asp-for="PaymentTitle" class="form-control" />
+                <span asp-validation-for="PaymentTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

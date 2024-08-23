@@ -1,0 +1,43 @@
+﻿@* @model Demo1.Models.User
+
+@{
+    ViewData["Title"] = "Tutor Dashboard";
+}
+
+<h2>Welcome, @Model.Name!</h2>
+<div>
+    <h3>Your Details</h3>
+    <p>Email: @Model.Email</p>
+    <p>City: @Model.City</p>
+    <p>Country: @Model.Country</p>
+    <p>Last Qualification: @Model.LastQualification</p>
+    <p>Experience: @Model.Experience</p>
+    <p>Subject Area: @Model.SubjectArea</p>
+    <p>Subject Area Expertise: @Model.SubjectAreaExpertise</p>
+    <!-- Add more tutor-specific information here -->
+</div>
+ *@
+
+ @model Demo1.Models.User
+
+@{
+    ViewData["Title"] = "Tutor Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/tutor-dashboard.css" asp-append-version="true" />
+}
+
+<div class="tutor-dashboard-container">
+    <h2>Welcome, @Model.Name!</h2>
+    <div class="tutor-details">
+        <h3>Your Details</h3>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>City:</strong> @Model.City</p>
+        <p><strong>Country:</strong> @Model.Country</p>
+        <p><strong>Last Qualification:</strong> @Model.LastQualification</p>
+        <p><strong>Experience:</strong> @Model.Experience</p>
+        <p><strong>Subject Area:</strong> @Model.SubjectArea</p>
+        <p><strong>Subject Area Expertise:</strong> @Model.SubjectAreaExpertise</p>
+    </div>
+</div>

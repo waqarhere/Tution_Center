@@ -1,0 +1,59 @@
+﻿/* Scoped styling for Add Subject page */
+
+/* Container styling */
+.add-subject-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f7f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    /* Heading */
+    .add-subject-container h2 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Form styling */
+    .add-subject-container .form-group {
+        margin-bottom: 15px;
+    }
+
+    .add-subject-container .form-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .add-subject-container .form-control {
+        border: 1px solid #BDC3C7;
+        border-radius: 4px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+        .add-subject-container .form-control:focus {
+            border-color: #2C3EC0;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 192, 0.25);
+        }
+
+    .add-subject-container .btn-submit {
+        background-color: #4957b7;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+        .add-subject-container .btn-submit:hover {
+            background-color: #1F2A69;
+        }
+
+    .add-subject-container .text-danger {
+        color: #E74C3C;
+    }

@@ -1,0 +1,94 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+    form div {
+        margin-bottom: 1.5rem;
+    }
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    select:focus {
+        border-color: #6e8efb;
+        outline: none;
+    }
+
+button {
+    background: #6e8efb;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+    button:hover {
+        background: #a777e3;
+    }
+
+span {
+    color: red;
+    font-size: 0.875rem;
+}
+
+.time-range {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Adjust spacing between fields as needed */
+}
+
+.time-range__label {
+    display: flex;
+    flex-direction: column;
+}
+
+    .time-range__label label {
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+        color: #444;
+    }
+
+    .time-range__label input[type="time"] {
+        width: auto;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 1rem;
+    }

@@ -1,0 +1,67 @@
+﻿/* departments.css */
+
+/* Ensures styles are scoped to this page only */
+#departments-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    #departments-page h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #343a40;
+    }
+
+    #departments-page p a {
+        font-size: 16px;
+        color: #ffffff;
+        text-decoration: none;
+        background-color: #007bff;
+        padding: 10px 15px;
+        border-radius: 5px;
+    }
+
+        #departments-page p a:hover {
+            background-color: #0056b3;
+            text-decoration: none;
+        }
+
+    #departments-page .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        #departments-page .table thead {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        #departments-page .table th, #departments-page .table td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        #departments-page .table th {
+            font-weight: bold;
+        }
+
+        #departments-page .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #departments-page .table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        #departments-page .table td {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+            #departments-page .table th:last-child, #departments-page .table td:last-child {
+                border-right: none;
+            }

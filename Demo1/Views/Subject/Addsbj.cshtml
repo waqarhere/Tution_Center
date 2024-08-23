@@ -1,0 +1,28 @@
+﻿
+@model Demo1.Models.Addsbj
+
+@{
+    ViewBag.Title = "Add Subject";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Addsub.css" asp-append-version="true" />
+}
+<div class="add-subject-container">
+    <h2>Add Subject</h2>
+
+    <form asp-action="Addsbj" method="post">
+        <div class="form-group">
+            <label for="Sujbect1" class="form-label">Subject:</label>
+            <input type="text" id="Sujbect1" name="Sujbect1" value="@Model.Sujbect1" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="Program" class="form-label"></label>
+            <input asp-for="Program" type="text" class="form-control" />
+            <span asp-validation-for="Program" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn-submit">Submit</button>
+    </form>
+</div>
+
+

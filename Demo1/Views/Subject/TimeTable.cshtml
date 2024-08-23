@@ -1,0 +1,96 @@
+﻿@model Demo1.Models.SbjTable
+
+@{
+    ViewBag.Title = "Time Table";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/TimeTableCreate.css" asp-append-version="true" />
+}
+
+<div class="time-table-container">
+    <h2>Time Table</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, "Select Course", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.Subject, new SelectList(Model.SubjectList), "-- Select Course --", new { @class = "form-control", @id = "SubjectDropdown" })
+        </div>
+
+        <div class="form-group">
+            <label asp-for="GeneratedTutorID" class="control-label">Select Tutor</label>
+            <select asp-for="GeneratedTutorID" class="form-control" asp-items="ViewBag.TutorList"></select>
+            <span asp-validation-for="GeneratedTutorID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tutor)
+            @Html.TextBoxFor(model => model.tutor, new { @class = "form-control", @readonly = "readonly", @id = "tutor" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AvailbleDay)
+            @Html.TextBoxFor(model => model.AvailbleDay, new { @class = "form-control", @readonly = "readonly", @id = "AvailbleDay" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Availbletimest)
+            @Html.TextBoxFor(model => model.Availbletimest, new { @class = "form-control", type = "time" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Availbletimeend)
+            @Html.TextBoxFor(model => model.Availbletimeend, new { @class = "form-control", type = "time" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    }
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Fetch tutors based on the selected course
+                $('#SubjectDropdown').change(function () {
+                    var selectedSubject = $(this).val();
+                    if (selectedSubject) {
+                        $.getJSON('@Url.Action("GetTutorsBySubject")', { subject: selectedSubject }, function (data) {
+                            if (data.success) {
+                                var $tutorDropdown = $('#GeneratedTutorID');
+                                $tutorDropdown.empty(); // Clear previous options
+
+                                $tutorDropdown.append($('<option>', { value: '', text: '-- Select Tutor --' }));
+                                $.each(data.tutors, function (index, tutor) {
+                                    $tutorDropdown.append($('<option>', { value: tutor.value, text: tutor.text }));
+                                });
+                            } else {
+                                alert(data.message);
+                            }
+                        });
+                    }
+                });
+
+                // Fetch tutor details when a tutor is selected
+                $('#GeneratedTutorID').change(function () {
+                    var generatedTutorID = $(this).val();
+                    if (generatedTutorID) {
+                        $.getJSON('@Url.Action("GetTutorTableDetails")', { generatedTutorID: generatedTutorID }, function (data) {
+                            if (data.success) {
+                                $('#tutor').val(data.tutor);
+                                $('#AvailbleDay').val(data.availbleDay);
+                                //$('#Availbletimest').val(data.availbletimest);
+                                //$('#Availbletimeend').val(data.availbletimeend);
+                            } else {
+                                alert(data.message);
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    }
+</div>

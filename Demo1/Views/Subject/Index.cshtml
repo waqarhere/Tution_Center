@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Demo1.Models.SbjTable>
+
+@{
+    ViewData["Title"] = "Time Table";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/TTview.css" asp-append-version="true" />
+}
+
+<div class="timetable-container">
+    <h2>Time Table</h2>
+
+    <div class="table-responsive">
+        <table class="table timetable-table">
+            <thead>
+                <tr>
+                    <th>Tutor ID</th>
+                    <th>Tutor</th>
+                    <th>Subject</th>
+                    <th>Available Day</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.GeneratedTutorID</td>
+                        <td>@item.tutor</td>
+                        <td>@item.Subject</td>
+                        <td>@item.AvailbleDay</td>
+                        <td>@item.Availbletimest</td>
+                        <td>@item.Availbletimeend</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="timetable-header">
+        <a asp-action="TimeTable" class="btn btn-create">Create New</a>
+    </div>
+</div>

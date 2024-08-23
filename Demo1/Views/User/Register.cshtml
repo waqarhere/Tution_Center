@@ -1,0 +1,188 @@
+﻿@{
+    Layout = null;
+}
+
+@model RegisterViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="~/css/StyleRegister.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <form asp-action="Register" method="post" enctype="multipart/form-data">
+        <!-- Role Selection -->
+        <div>
+            <label asp-for="Role">Register as</label>
+            <select asp-for="Role" id="Role">
+                <option value="">Select</option>
+                <option value="Student">Student</option>
+                <option value="Tutor">Tutor</option>
+            </select>
+            <span asp-validation-for="Role"></span>
+        </div>
+
+        <!-- Common Fields -->
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="Mobile"></label>
+            <input asp-for="Mobile" />
+            <span asp-validation-for="Mobile"></span>
+        </div>
+        <div>
+            <label asp-for="Email"></label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label asp-for="City"></label>
+            <input asp-for="City" />
+            <span asp-validation-for="City"></span>
+        </div>
+        <div>
+            <label asp-for="Country"></label>
+            <input asp-for="Country" />
+            <span asp-validation-for="Country"></span>
+        </div>
+        <div>
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <!-- Student-specific fields -->
+        <div id="student-fields" class="role-fields" style="display: none;">
+            <div>
+                <label asp-for="FatherName"></label>
+                <input asp-for="FatherName" />
+                <span asp-validation-for="FatherName"></span>
+            </div>
+            <div>
+                <label asp-for="FatherMobile"></label>
+                <input asp-for="FatherMobile" />
+                <span asp-validation-for="FatherMobile"></span>
+            </div>
+            <div>
+                <label asp-for="Program"></label>
+                <input asp-for="Program" type="text" />
+                <span asp-validation-for="Program"></span>
+            </div>
+            <div>
+                <label asp-for="PicturePath"></label>
+                <input asp-for="PicturePath" type="file" />
+                <span asp-validation-for="PicturePath"></span>
+            </div>
+            <div>
+                <label asp-for="MatricMarksheetPath"></label>
+                <input asp-for="MatricMarksheetPath" type="file" />
+                <span asp-validation-for="MatricMarksheetPath"></span>
+            </div>
+            <div>
+                <label asp-for="MatricCertificatePath"></label>
+                <input asp-for="MatricCertificatePath" type="file" />
+                <span asp-validation-for="MatricCertificatePath"></span>
+            </div>
+            <div>
+                <label asp-for="InterMarksheetPath"></label>
+                <input asp-for="InterMarksheetPath" type="file" />
+                <span asp-validation-for="InterMarksheetPath"></span>
+            </div>
+            <div>
+                <label asp-for="InterCertificatePath"></label>
+                <input asp-for="InterCertificatePath" type="file" />
+                <span asp-validation-for="InterCertificatePath"></span>
+            </div>
+            <div>
+                <label asp-for="CnicPath"></label>
+                <input asp-for="CnicPath" type="file" />
+                <span asp-validation-for="CnicPath"></span>
+            </div>
+        </div>
+
+        <!-- Tutor-specific fields -->
+        <div id="tutor-fields" class="role-fields" style="display: none;">
+            <div>
+                <label asp-for="LastQualification"></label>
+                <input asp-for="LastQualification" />
+                <span asp-validation-for="LastQualification"></span>
+            </div>
+            <div>
+                <label asp-for="Experience"></label>
+                <input asp-for="Experience" />
+                <span asp-validation-for="Experience"></span>
+            </div>
+            <div>
+                <label asp-for="SubjectArea"></label>
+                <input asp-for="SubjectArea" />
+                <span asp-validation-for="SubjectArea"></span>
+            </div>
+            <div>
+                <label asp-for="SubjectAreaExpertise"></label>
+                <input asp-for="SubjectAreaExpertise" />
+                <span asp-validation-for="SubjectAreaExpertise"></span>
+            </div>
+            <div>
+                <label asp-for="BachelorsDegreePath"></label>
+                <input asp-for="BachelorsDegreePath" type="file" />
+                <span asp-validation-for="BachelorsDegreePath"></span>
+            </div>
+            <div>
+                <label asp-for="MastersDegreePath"></label>
+                <input asp-for="MastersDegreePath" type="file" />
+                <span asp-validation-for="MastersDegreePath"></span>
+            </div>
+            <div>
+                <label asp-for="CvPath"></label>
+                <input asp-for="CvPath" type="file" />
+                <span asp-validation-for="CvPath"></span>
+            </div>
+            <div>
+                <label asp-for="avlDay">Available Day</label>
+                <input asp-for="avlDay" type="date" />
+                <span asp-validation-for="avlDay"></span>
+            </div>
+    
+            <div>
+                <label for="avlTimestrt">Available Time</label>
+            </div>
+            
+            <div class="time-range">
+                <input id="avlTimestrt" asp-for="avlTimestrt" type="time" />
+                <label for="avlTimeend">To</label>
+                <input id="avlTimeend" asp-for="avlTimeend" type="time" />
+                <span asp-validation-for="avlTimestrt"></span>
+                <span asp-validation-for="avlTimeend"></span>
+            </div>
+
+
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        document.getElementById("Role").addEventListener("change", function () {
+            var role = this.value;
+            if (role === "Student") {
+                document.getElementById("student-fields").style.display = "block";
+                document.getElementById("tutor-fields").style.display = "none";
+            } else if (role === "Tutor") {
+                document.getElementById("student-fields").style.display = "none";
+                document.getElementById("tutor-fields").style.display = "block";
+            } else {
+                document.getElementById("student-fields").style.display = "none";
+                document.getElementById("tutor-fields").style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

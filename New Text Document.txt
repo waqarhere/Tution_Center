@@ -1,0 +1,125 @@
+using System.IO;
+using Demo1.Data;
+using Demo1.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+
+public class UserController : Controller
+{
+    private readonly UserDbContext _context;
+    private readonly IWebHostEnvironment _environment;
+
+    public UserController(UserDbContext context, IWebHostEnvironment environment)
+    {
+        _context = context;
+        _environment = environment;
+    }
+
+    // GET: User/Register
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    // POST: User/Register
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(RegisterViewModel model, IFormFile PicturePath, IFormFile MatricMarksheetPath, IFormFile MatricCertificatePath, IFormFile InterMarksheetPath, IFormFile InterCertificatePath, IFormFile CnicPath, IFormFile BachelorsDegreePath, IFormFile MastersDegreePath, IFormFile CvPath)
+    {
+        if (ModelState.IsValid)
+        {
+
+        }
+
+        var user = new User
+        {
+            Name = model.Name,
+            Mobile = model.Mobile,
+            Email = model.Email,
+            City = model.City,
+            Country = model.Country,
+            Role = model.Role,
+            Password = model.Password
+        };
+
+        if (model.Role == "Student")
+        {
+            user.FatherName = model.FatherName;
+            user.FatherMobile = model.FatherMobile;
+            user.PicturePath = await SaveFile(PicturePath);
+            user.MatricMarksheetPath = await SaveFile(MatricMarksheetPath);
+            user.MatricCertificatePath = await SaveFile(MatricCertificatePath);
+            user.InterMarksheetPath = await SaveFile(InterMarksheetPath);
+            user.InterCertificatePath = await SaveFile(InterCertificatePath);
+            user.CnicPath = await SaveFile(CnicPath);
+        }
+        else if (model.Role == "Tutor")
+        {
+            user.LastQualification = model.LastQualification;
+            user.Experience = model.Experience;
+            user.SubjectArea = model.SubjectArea;
+            user.SubjectAreaExpertise = model.SubjectAreaExpertise;
+            user.BachelorsDegreePath = await SaveFile(BachelorsDegreePath);
+            user.MastersDegreePath = await SaveFile(MastersDegreePath);
+            user.CvPath = await SaveFile(CvPath);
+        }
+
+        _context.Add(user);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Login));
+
+        //return View(model);
+    }
+
+    private async Task<string> SaveFile(IFormFile file)
+    {
+        var fileExtension = Path.GetExtension(file.FileName);
+        if (fileExtension.ToLower() != ".pdf")
+        {
+            throw new InvalidOperationException("Only PDF files are allowed.");
+        }
+
+        if (file != null && file.Length > 0)
+        {
+            var uploadDir = Path.Combine(_environment.WebRootPath, "Upload");
+            var filePath = Path.Combine(uploadDir, file.FileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+            return Path.Combine("Upload", file.FileName);
+        }
+        return null;
+    }
+
+
+    // GET: User/Login
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    // POST: User/Login
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(LoginViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password && u.Role == model.Role);
+
+            if (user != null)
+            {
+                // Set up authentication and redirect to the appropriate page
+                return RedirectToAction("Index", "Home");
+            }
+
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+        }
+        return View(model);
+    }
+}

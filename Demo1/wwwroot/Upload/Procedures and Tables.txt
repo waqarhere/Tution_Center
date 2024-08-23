@@ -1,0 +1,126 @@
+CREATE TABLE [dbo].[Members] (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(255) NOT NULL,
+    Designation NVARCHAR(255) NOT NULL,
+    sno INT NOT NULL,
+    MinutesId INT,
+    FOREIGN KEY ([MinutesId]) REFERENCES [dbo].[MeetingMinutes]([MinutesId])
+);
+
+
+Create PROCEDURE [dbo].[sp_InsertMember]
+	@sno int,
+    @Name VARCHAR(max),
+    @Designation VARCHAR(max),
+	@MinutesId int,
+    @Id INT OUTPUT
+AS
+BEGIN
+    INSERT INTO Members (Name, Designation,MinutesId,sno)
+    VALUES (@Name, @Designation,@MinutesId,@sno);
+	
+    SET @Id = SCOPE_IDENTITY();
+END
+
+CREATE TABLE [dbo].[MeetingMinutes] (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    dayInput DATE NOT NULL,
+    FullDate DATE NOT NULL,
+    campusSelect NVARCHAR(255),
+    Recite NVARCHAR(MAX),
+    Proposal NVARCHAR(MAX),
+    Proposal1 NVARCHAR(MAX),
+    Agenda NVARCHAR(MAX)
+);
+
+CREATE PROCEDURE [dbo].[InsertMeetingMinutes]
+    @dayInput VARCHAR(max),
+    @FullDate varchar(max),
+    @campusSelect VARCHAR(max),
+    @Recite VARCHAR(max),
+    @Proposal VARCHAR(max),
+    @Proposal1 VARCHAR(max),
+    @Agenda varchar(max),
+    @Id INT OUTPUT
+AS
+BEGIN
+    INSERT INTO MeetingMinutes (dayInput, FullDate, campusSelect, Recite, Proposal, Proposal1, Agenda)
+    VALUES (@dayInput, @FullDate, @campusSelect, @Recite, @Proposal, @Proposal1, @Agenda);
+
+    SET @Id = SCOPE_IDENTITY();
+END
+
+CREATE TABLE [dbo].[MeetingAgenda] (
+    AgendaId INT IDENTITY(1,1) PRIMARY KEY,
+    DayNumber INT NOT NULL,
+    FullDate DATE NOT NULL,
+    Campus NVARCHAR(255),
+    Agenda NVARCHAR(MAX)
+);
+
+CREATE PROCEDURE [dbo].[InsertMeetingAgenda]
+    @DayNumber NVARCHAR(10), -- Change the type to NVARCHAR
+    @FullDate NVARCHAR(MAX),
+    @Campus NVARCHAR(50),
+    @Agenda NVARCHAR(MAX)
+AS
+BEGIN
+    INSERT INTO MeetingAgenda (DayNumber, FullDate, Campus, Agenda)
+    VALUES (@DayNumber, @FullDate, @Campus, @Agenda);
+END
+
+CREATE TABLE [dbo].[MeetingDetails] (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    MeetingDate DATE NOT NULL,
+    Agenda NVARCHAR(MAX),
+    Minutes NVARCHAR(MAX),
+    WorkingPapers NVARCHAR(MAX),
+    Board NVARCHAR(255),
+    StatutoryBody NVARCHAR(255)
+);
+
+create PROCEDURE [dbo].[InsertMeetingDetailsSP2]
+    @MeetingDate DATETIME,
+    @Agenda NVARCHAR(MAX),
+    @Minutes NVARCHAR(MAX),
+    @WorkingPapers NVARCHAR(MAX),
+    @Board NVARCHAR(255),
+    @StatutoryBody NVARCHAR(255)
+AS
+BEGIN
+    INSERT INTO meetingdetails (MeetingDate, Agenda, Minutes, WorkingPapers, Board, StatutoryBody)
+    VALUES (@MeetingDate, @Agenda, @Minutes, @WorkingPapers, @Board, @StatutoryBody);
+END;
+
+
+create PROCEDURE [dbo].[spAddBoardNames]
+    @BoardName NVARCHAR(max),
+    @FacultyName NVARCHAR(max),
+    @DepartmentName NVARCHAR(max),
+    @StatutoryBody NVARCHAR(max),
+    @EntryDate DATETIME
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO BoardNames (BoardName, FacultyName, DepartmentName, StatutoryBody, EntryDate)
+    VALUES (@BoardName, @FacultyName, @DepartmentName, @StatutoryBody, @EntryDate);
+END
+
+CREATE PROCEDURE [dbo].[spAddStatutoryMembers]
+    @Board NVARCHAR(max),
+    @Clause NVARCHAR(max),
+    @MemberName NVARCHAR(max),
+    @AppointmentDate DATETIME,
+    @ResignationDate DATETIME,
+    @EntryDate DATETIME,
+    @StatutoryBody NVARCHAR(max)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO StatutoryMembers (Board, Clause, MemberName, AppointmentDate, ResignationDate, EntryDate, StatutoryBody)
+    VALUES (@Board, @Clause, @MemberName, @AppointmentDate, @ResignationDate, @EntryDate, @StatutoryBody);
+END
+
+

@@ -1,0 +1,54 @@
+﻿@model Demo1.Models.Pay
+
+@{
+    ViewData["Title"] = "Pay";
+}
+
+<h2>Pay</h2>
+
+<h4>Student Pay</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Pay">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, "Select Course", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.Title, new SelectList(Model.TitleList), "-- Select Course --", new { @class = "form-control", @id = "TitleDropdown" })
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr />
+
+<h4>Available Payment Processes</h4>
+
+<div class="row">
+    <div class="col-md-8">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PaymentProcesses)
+                {
+                    <tr>
+                        <td>@item.PaymentTitle</td>
+                        <td>@item.Amount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

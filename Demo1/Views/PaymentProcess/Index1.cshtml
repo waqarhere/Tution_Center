@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Demo1.Models.Pay>
+
+@{
+    ViewData["Title"] = "Departments";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/payment-index1.css" asp-append-version="true" />
+}
+
+<div id="payments-page" class="container">
+    <h2>Paid Fee</h2>
+
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>PaymentTitle</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

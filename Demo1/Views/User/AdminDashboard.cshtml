@@ -1,0 +1,104 @@
+﻿@model Demo1.Models.AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = null; // Ensures no conflict with existing layouts
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/StyleAdmin.css" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2>Tuition Center</h2>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Students</a></li>
+                <li><a href="#">Tutors</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Schedules</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h2>Student Details</h2>
+            <table class="table-style">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Verification</th>
+                        <th>Generated ID</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Students)
+                    {
+                        <tr>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                            <td>@user.Verfication</td>
+                            <td>@user.GeneratedID</td>
+                            <td>
+                                <a href="@Url.Action("StdPaymentDetails", "PaymentProcess", new { userId = user.Id })" class="btn btn-primary">
+                                    View Payments
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <h2>Tutor Details</h2>
+            <table class="table-style">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Verification</th>
+                        <th>Generated ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Tutors)
+                    {
+                        <tr>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                            <td>@user.Verfication</td>
+                            <td>@user.GeneratedID</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <h2>Update Verification Status and Generated ID</h2>
+            <form asp-action="UpdateVerificationStatus" method="post">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="verification">Verification Status:</label>
+                    <input type="text" id="verification" name="verification" required />
+                </div>
+                <div class="form-group">
+                    <label for="generatedID">Generated ID:</label>
+                    <input type="text" id="generatedID" name="generatedID" />
+                </div>
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

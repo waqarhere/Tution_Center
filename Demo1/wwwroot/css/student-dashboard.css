@@ -1,0 +1,51 @@
+﻿.dashboard-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f5f7fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.left-content {
+    flex: 1;
+    margin-right: 20px;
+}
+
+    .left-content h1 {
+        font-size: 24px;
+        color: #2C3EC0;
+        margin-bottom: 10px;
+    }
+
+    .left-content h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+.details p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+    .details p strong {
+        color: #2C3EC0;
+    }
+
+.right-content {
+    flex-basis: 200px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 10px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px; /* Adds a moderate radius to all corners */
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

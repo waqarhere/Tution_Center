@@ -1,0 +1,31 @@
+﻿@model Demo1.Models.User
+
+@{
+    ViewBag.Title = "Student Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/student-dashboard.css" asp-append-version="true" />
+}
+
+<div class="dashboard-container">
+    <div class="left-content">
+        <h1>Welcome, @Model.Name!</h1>
+        <h2>Student Dashboard</h2>
+        <div class="details">
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>City:</strong> @Model.City</p>
+            <p><strong>Country:</strong> @Model.Country</p>
+            <p><strong>Father's Name:</strong> @Model.FatherName</p>
+            <p><strong>Father's Mobile:</strong> @Model.FatherMobile</p>
+            <p><strong>Program:</strong> @Model.Programs</p>
+            <p><strong>Matric Certificate:</strong> <a href="~/@Model.MatricCertificatePath" target="_blank">View</a></p>
+            <p><strong>Inter Certificate:</strong> <a href="~/@Model.InterCertificatePath" target="_blank">View</a></p>
+        </div>
+    </div>
+    <div class="right-content">
+        <a href="~/@Model.PicturePath" target="_blank">
+            <img src="~/@Model.PicturePath" alt="Student Picture" class="profile-picture">
+        </a>
+    </div>
+</div>

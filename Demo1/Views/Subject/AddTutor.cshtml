@@ -1,0 +1,132 @@
+﻿@model Demo1.Models.Addttr
+
+@{
+    ViewBag.Title = "Add Tutor";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Addtutor.css" asp-append-version="true" />
+}
+
+<div class="add-tutor-container">
+    <h2>Add Tutor</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GeneratedID, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.GeneratedID, new { @class = "form-control", @id = "GeneratedID" })
+            @Html.ValidationMessageFor(model => model.GeneratedID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @readonly = "readonly", @id = "Name" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @readonly = "readonly", @id = "Email" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Program, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Program, new { @class = "form-control", @readonly = "readonly", @id = "Program" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, "Select Subject", new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.Subject, new SelectList(Model.SubjectList), "-- Select Subject --", new { @class = "form-control", @id = "SubjectDropdown" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GeneratedTutorID, "Select Tutor", new { @class = "form-label" })
+            <select asp-for="GeneratedTutorID" class="form-control" asp-items="ViewBag.TutorList"></select>
+            <span asp-validation-for="GeneratedTutorID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tutor, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.tutor, new { @class = "form-control", @readonly = "readonly", @id = "tutor" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AvailbleDay, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.AvailbleDay, new { @class = "form-control", @readonly = "readonly", @id = "AvailbleDay" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Availbletimest, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Availbletimest, new { @class = "form-control", @readonly = "readonly", @id = "Availbletimest" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Availbletimeend, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Availbletimeend, new { @class = "form-control", @readonly = "readonly", @id = "Availbletimeend" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-submit" />
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Fetch student details
+            $('#GeneratedID').blur(function () {
+                var generatedID = $(this).val();
+                if (generatedID) {
+                    $.getJSON('@Url.Action("GetStudentDetails")', { generatedID: generatedID }, function (data) {
+                        if (data.success) {
+                            $('#Name').val(data.name);
+                            $('#Email').val(data.email);
+                            $('#Program').val(data.program);
+
+                            // Fetch subjects for the selected student
+                            $.getJSON('@Url.Action("GetSubjects")', { generatedID: generatedID }, function (subjectData) {
+                                if (subjectData.success) {
+                                    var $subjectDropdown = $('#SubjectDropdown');
+                                    $subjectDropdown.empty(); // Clear previous options
+
+                                    $subjectDropdown.append($('<option>', { value: '', text: '-- Select Subject --' }));
+                                    $.each(subjectData.subjects, function (index, subject) {
+                                        $subjectDropdown.append($('<option>', { value: subject, text: subject }));
+                                    });
+                                } else {
+                                    alert(subjectData.message);
+                                }
+                            });
+
+                        } else {
+                            alert(data.message);
+                        }
+                    });
+                }
+            });
+
+            // Fetch tutor details
+            $('#GeneratedTutorID').blur(function () {
+                var generatedTutorID = $(this).val();
+                if (generatedTutorID) {
+                    $.getJSON('@Url.Action("GetTutorDetails")', { generatedTutorID: generatedTutorID }, function (data) {
+                        if (data.success) {
+                            $('#tutor').val(data.tutor);
+                            $('#AvailbleDay').val(data.availbleDay);
+                            $('#Availbletimest').val(data.availbletimest);
+                            $('#Availbletimeend').val(data.availbletimeend);
+                        } else {
+                            alert(data.message);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+

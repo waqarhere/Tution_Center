@@ -1,0 +1,61 @@
+﻿/* Scoped styling for Time Table page */
+
+/* Container styling */
+.time-table-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #f4f7f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    /* Heading */
+    .time-table-container h2 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Form styling */
+    .time-table-container .form-group {
+        margin-bottom: 15px;
+    }
+
+    .time-table-container .control-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .time-table-container .form-control {
+        border: 1px solid #BDC3C7;
+        border-radius: 4px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+        .time-table-container .form-control:focus {
+            border-color: #2C3EC0;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 192, 0.25);
+        }
+
+    /* Button styling */
+    .time-table-container .btn-primary {
+        background-color: #4957b7;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+        .time-table-container .btn-primary:hover {
+            background-color: #1F2A69;
+        }
+
+    /* Validation message styling */
+    .time-table-container .text-danger {
+        color: #E74C3C;
+    }

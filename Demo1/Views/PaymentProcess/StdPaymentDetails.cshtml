@@ -1,0 +1,32 @@
+﻿@model Demo1.Models.PaymentProcess
+
+@{
+    ViewData["Title"] = "Pay";
+}
+
+<h2>Pay</h2>
+
+<h4>Student Payments</h4>
+
+<div class="row">
+    <div class="col-md-8">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.pay)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

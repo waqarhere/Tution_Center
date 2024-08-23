@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+}
+
+<div class="hero-section text-center">
+    <h1 class="display-4">Welcome to the Tuition Centre</h1>
+    <p class="lead">Empowering Education Through Technology</p>
+    <a class="btn btn-primary btn-lg" href="#learn-more" role="button">Learn More</a>
+</div>
+
+<section id="features" class="container my-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="feature-box text-center">
+                <h2>Personalized Learning</h2>
+                <p>Custom-tailored education plans to meet each student's unique needs.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box text-center">
+                <h2>Expert Tutors</h2>
+                <p>Experienced and qualified tutors to guide you every step of the way.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box text-center">
+                <h2>Flexible Scheduling</h2>
+                <p>Choose the time slots that work best for you with our flexible scheduling.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="learn-more" class="text-center my-5">
+    <h2>Get Started Today</h2>
+    <p>Join us and take the first step towards a brighter future.</p>
+    <a class="btn btn-success btn-lg" href="/User/Register" role="button">Register Now</a>
+</section>
